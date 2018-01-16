@@ -132,9 +132,34 @@ var isValidNewBlock = (newBlock, previousBlock) => {
         console.log(typeof (newBlock.hash) + ' ' + typeof calculateHashForBlock(newBlock));
         console.log('invalid hash: ' + calculateHashForBlock(newBlock) + ' ' + newBlock.hash);
         return false;
+    } else if (!isPeerHasEnoughKudos(newBlock)){
+        console.log("User doesn't have enough kudos");
+        return false;
     }
     return true;
 };
+
+var isPeerHasEnoughKudos = (newBlock) => {
+    var newBlockSender = newBlock.data.split('|')[0];
+    var sentKudosCount = 0;
+    blockchain.forEach(block => {
+        var sender = block.data.split('|')[0];
+        if (sender == newBlockSender){
+            var blockDate = new Date();
+            blockDate.setTime(block.timestamp * 1000);
+
+            if (blockDate.getMonth() == new Date().getMonth()){
+                sentKudosCount++;
+            }
+        }
+    });
+
+    if (sentKudosCount > 1) {
+        return false;
+    }
+
+    return true;
+}
 
 var connectToPeers = (newPeers) => {
     newPeers.forEach((peer) => {
