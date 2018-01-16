@@ -20,7 +20,7 @@
     <h2>Stats</h2>
     <ul>
       <li v-for="[key, value] of Object.entries(stats)" :key="key">
-        {{key}}: {{value}}
+        {{key}}: <img src="http://s3.amazonaws.com/pix.iemoji.com/sams33/0474.png" width="16" height="16" v-for="n in value" />
       </li>
     </ul>
     <h2>Blocks</h2>
