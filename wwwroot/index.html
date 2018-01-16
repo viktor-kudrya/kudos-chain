@@ -14,9 +14,15 @@
       <input v-model="target" id="target" type="text" placeholder="Slack user name">
       <button @click.prevent="sendKudos">Send</button>
     </form>
+    <h2>Stats</h2>
+    <ul>
+      <li v-for="[key, value] of Object.entries(stats)" :key="key">
+        {{key}}: {{value}}
+      </li>
+    </ul>
     <h2>Blocks</h2>
     <ul>
-      <li v-for="block in blocks" :key="block">
+      <li v-for="block in blocks" :key="block.data">
         {{block.data}}
       </li>
     </ul>
