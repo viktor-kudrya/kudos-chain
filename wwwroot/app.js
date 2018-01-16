@@ -4,10 +4,12 @@ new Vue({
     return {
       blocks: [],
       target: null,
-      stats: {}
+      stats: {},
+      wsPort: null
     }
   },
   created() {
+    this.loadWsPort()
     this.loadBlocks()
   },
   computed: {
@@ -16,6 +18,12 @@ new Vue({
     }
   },
   methods: {
+    loadWsPort() {
+      axios.get('/wsport')
+        .then(response => {
+          this.wsPort = response.data
+        })
+    },
     loadBlocks() {
       axios.get('/blocks')
         .then(response => {

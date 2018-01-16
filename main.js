@@ -52,6 +52,7 @@ var initHttpServer = () => {
         connectToPeers([req.body.peer]);
         res.send();
     });
+    app.get('/wsport', (req, res) => res.send(p2p_port));
     app.listen(http_port, '0.0.0.0', () => console.log('Listening http on port: ' + http_port));
 };
 
