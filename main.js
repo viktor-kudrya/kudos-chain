@@ -52,7 +52,7 @@ var initHttpServer = () => {
         connectToPeers([req.body.peer]);
         res.send();
     });
-    app.listen(http_port, () => console.log('Listening http on port: ' + http_port));
+    app.listen(http_port, '0.0.0.0', () => console.log('Listening http on port: ' + http_port));
 };
 
 
