@@ -3,6 +3,7 @@ var CryptoJS = require("crypto-js");
 var express = require("express");
 var bodyParser = require('body-parser');
 var WebSocket = require("ws");
+var os = require('os');
 
 var http_port = process.env.HTTP_PORT || 3001;
 var p2p_port = process.env.P2P_PORT || 6001;
@@ -38,7 +39,7 @@ var initHttpServer = () => {
 
     app.get('/blocks', (req, res) => res.send(JSON.stringify(blockchain)));
     app.post('/mineBlock', (req, res) => {
-        var blockData = http_port + '|' + req.body.target
+        var blockData = os.hostname() + '|' + req.body.target
         var newBlock = generateNextBlock(blockData);
         addBlock(newBlock);
         broadcast(responseLatestMsg());
