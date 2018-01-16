@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "cross-env HTTP_PORT=3001 P2P_PORT=6001 node main.js"
+    "start": "cross-env HTTP_PORT=3001 P2P_PORT=6001 node main.js",
+    "2": "cross-env HTTP_PORT=3002 P2P_PORT=6002 PEERS=ws://localhost:6001 node main.js",
+    "3": "cross-env HTTP_PORT=3003 P2P_PORT=6003 PEERS=ws://localhost:6001 node main.js"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
