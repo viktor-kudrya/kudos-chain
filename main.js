@@ -58,10 +58,10 @@ var initHttpServer = () => {
     app.get('/info', (req, res) => res.send({
         hostname: os.hostname(),
         wsPort: p2p_port,
-        peers: getAllPeers()
+        peers: ['ws://' + os.hostname() + ':' + p2p_port].concat(getAllPeers()
             .map(peer => {
-                return peer.split(':')[0] + ':6001'
-            })
+                return 'ws://' + peer.split(':')[0] + ':6001'
+            }))
     }));
     app.listen(http_port, '0.0.0.0', () => console.log('Listening http on port: ' + http_port));
 };
