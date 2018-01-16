@@ -7,12 +7,22 @@
   <title>Document</title>
 </head>
 <body>
-  <h1>Kudos</h1>
-  <form>
-    <label for="target">Send kudos to</label>
-    <input id="target" type="text" placeholder="Slack user name">
-    <button onclick="axios.post('/mineBlock', document.querySelector('#target').value)">Send</button>
-  </form>
+  <div id="app">
+    <h1>Kudos</h1>
+    <form>
+      <label for="target">Send kudos to</label>
+      <input v-model="target" id="target" type="text" placeholder="Slack user name">
+      <button @click.prevent="sendKudos">Send</button>
+    </form>
+    <h2>Blocks</h2>
+    <ul>
+      <li v-for="block in blocks" :key="block">
+        {{block.data}}
+      </li>
+    </ul>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="./app.js"></script>
 </body>
 </html>
