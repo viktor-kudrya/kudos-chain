@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Kudos</h1>
+  <form>
+    <label for="target">Send kudos to</label>
+    <input id="target" type="text" placeholder="Slack user name">
+    <button onclick="axios.post('/mineBlock', document.querySelector('#target').value)">Send</button>
+  </form>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</body>
+</html>
