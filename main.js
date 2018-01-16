@@ -171,7 +171,7 @@ var isPeerHasEnoughKudos = (newBlock) => {
         }
     });
 
-    if (sentKudosCount > 1) {
+    if (sentKudosCount > 5) {
         return false;
     }
 
