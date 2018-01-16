@@ -5,24 +5,21 @@ new Vue({
       blocks: [],
       target: null,
       stats: {},
-      wsPort: null,
+      info: {
+        peers: []
+      },
       error: null
     }
   },
   created() {
-    this.loadWsPort()
+    this.loadInfo()
     this.loadBlocks()
   },
-  computed: {
-    statsList() {
-      return Object.entries(this.stats)
-    }
-  },
   methods: {
-    loadWsPort() {
-      axios.get('/wsport')
+    loadInfo() {
+      axios.get('/info')
         .then(response => {
-          this.wsPort = response.data
+          this.info = response.data
         })
     },
     loadBlocks() {

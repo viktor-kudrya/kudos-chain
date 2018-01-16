@@ -7,10 +7,12 @@
   <title>Document</title>
 </head>
 <body>
-  <div id="app">
+  <div id="app" style="max-width: 1000px">
     <h1>Kudos</h1>
-    <i>Connect to network:</i>
-    <pre>cmd /C "set HTTP_PORT=3001 && set P2P_PORT=6001 && set PEERS=ws://{{window.location.hostname}}:{{wsPort}} && node main.js"</pre>
+    <div>
+      <i>Connect to network:</i>
+      <pre style="background-color: whitesmoke">cmd /C "set HTTP_PORT=3001 && set P2P_PORT=6001 && set PEERS=ws://{{info.hostname}}:{{info.wsPort}},{{info.peers.join()}} && node main.js"</pre>
+    </div>
     <form>
       <label for="target">Send kudos to</label>
       <input v-model="target" id="target" type="text" placeholder="Slack user name">

@@ -49,16 +49,26 @@ var initHttpServer = () => {
         res.send(ok);
     });
     app.get('/peers', (req, res) => {
-        res.send(sockets.map(s => s._socket.remoteAddress + ':' + s._socket.remotePort));
+        res.send(getAllPeers());
     });
     app.post('/addPeer', (req, res) => {
         connectToPeers([req.body.peer]);
         res.send();
     });
-    app.get('/wsport', (req, res) => res.send(p2p_port));
+    app.get('/info', (req, res) => res.send({
+        hostname: os.hostname(),
+        wsPort: p2p_port,
+        peers: getAllPeers()
+            .map(peer => {
+                return peer.split(':')[0] + ':6001'
+            })
+    }));
     app.listen(http_port, '0.0.0.0', () => console.log('Listening http on port: ' + http_port));
 };
 
+var getAllPeers = () => {
+    return sockets.map(s => s._socket.remoteAddress + ':' + s._socket.remotePort);
+};
 
 var initP2PServer = () => {
     var server = new WebSocket.Server({port: p2p_port});
