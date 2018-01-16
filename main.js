@@ -40,10 +40,12 @@ var initHttpServer = () => {
     app.post('/mineBlock', (req, res) => {
         var blockData = http_port + '|' + req.body.target
         var newBlock = generateNextBlock(blockData);
-        addBlock(newBlock);
-        broadcast(responseLatestMsg());
-        console.log('block added: ' + JSON.stringify(newBlock));
-        res.send();
+        var ok = addBlock(newBlock);
+        if (ok) {
+            broadcast(responseLatestMsg());
+            console.log('block added: ' + JSON.stringify(newBlock));
+        }
+        res.send(ok);
     });
     app.get('/peers', (req, res) => {
         res.send(sockets.map(s => s._socket.remoteAddress + ':' + s._socket.remotePort));
@@ -119,6 +121,9 @@ var calculateHash = (index, previousHash, timestamp, data) => {
 var addBlock = (newBlock) => {
     if (isValidNewBlock(newBlock, getLatestBlock())) {
         blockchain.push(newBlock);
+        return true;
+    } else {
+        return false;
     }
 };
 

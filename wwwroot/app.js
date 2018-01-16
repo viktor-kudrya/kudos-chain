@@ -5,7 +5,8 @@ new Vue({
       blocks: [],
       target: null,
       stats: {},
-      wsPort: null
+      wsPort: null,
+      error: null
     }
   },
   created() {
@@ -49,7 +50,12 @@ new Vue({
       axios.post('/mineBlock', {
         target: this.target
       }).then(response => {
-        this.loadBlocks()
+        if (!response.data) {
+          this.error = `Sorry, no more cudos this month!`
+        } else {
+          this.error = null
+          this.loadBlocks()
+        }
       })
     }
   }
